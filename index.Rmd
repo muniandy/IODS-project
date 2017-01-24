@@ -1,5 +1,6 @@
 ---
 title: "IODS course project"
+author: "Mahes Muniandy"
 output:
   html_document:
     theme: cosmo
