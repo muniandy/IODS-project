@@ -5,11 +5,11 @@ date: "24 January 2017"
 output: html_document
 ---
 
-```
 ## Basic Information
 This course is important for all data science students. Besides facilitating the learning of R in a systematic, well-structured manner, it teaches important tools for version control and code maintenance.
 
-Mahes Muniandy https://muniandy.github.io/IODS-project/
+https://muniandy.github.io/IODS-project/
 
-```
+
+
 

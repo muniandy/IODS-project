@@ -3,7 +3,7 @@ title: "IODS course project"
 author: "Mahes Muniandy"
 output:
   html_document:
-    theme: sandstorm
+    theme: sandstone
     toc: true
     toc_depth: 2
     fig_caption: true
