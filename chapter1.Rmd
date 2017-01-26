@@ -1,8 +1,8 @@
 
 
-# Introduction to Open Data Science
+# Introduction to Open Data Science (Spring 2017)
 
-## Spring 2017
+## Chapter 1: Basics
 
 This course is important for all data science students. Besides facilitating the learning of R in a systematic, well-structured manner, it teaches important tools for research sharing, version control and code maintenance.
 
