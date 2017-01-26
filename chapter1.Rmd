@@ -6,6 +6,4 @@
 
 This course is important for all data science students. Besides facilitating the learning of R in a systematic, well-structured manner, it teaches important tools for research sharing, version control and code maintenance.
 
-Mahes Muniandy 
-
 https://muniandy.github.io/IODS-project/
