@@ -1,6 +1,6 @@
 ---
 title: "IODS course project"
-author: "Mahes Muniandy"
+author: "Maheswary Muniandy"
 output:
   html_document:
     theme: sandstone
