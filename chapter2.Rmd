@@ -1,7 +1,55 @@
-# Insert chapter 2 title here
+# Regression and Model Validation
 
-*Describe the work you have done this week and summarize your learning.*
+*In this chapter, we learnt how to read data from files and the internet. We also learnt how to explore the contents
+of the file, check the data types and visual the data. Lastly, we learnt how to model our data using a linear regression model*
 
-- Describe your work and results clearly. 
-- Assume the reader has an introductory course level understanding of writing and reading R code as well as statistical methods
-- Assume the reader has no previous knowledge of your data or the more advanced methods you are using  
+- We read in data from an URL, visualized the data and relationships between the variables and performed linear regression on selecetd data.
+ 
+
+<!-- ##reading the data -->
+
+```{r read data, eval=TRUE, echo=FALSE, warning=FALSE}
+
+lrn14 = read.table(url("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/learning2014.txt"), sep=",",header=TRUE)
+dim(lrn14)
+str(lrn14)
+```
+This dataset has 7 variables and 166 rows. This data comprised scores that belonged to three different types of questions i.e.
+- deep, strategic and surface questions. Each question type (deep, strategic, surface) has several questions linked to it.
+- For each group of questions, the average score was calculated and assigned to variables "deep", "stra" and "surf". 
+- For each row, the average of the three scores (deep, stra and surf) is in the variable "points". 
+- Other variables include gender, age and attitude.
+<!-- ##visualizing the data -->
+```{r visualize data, eval=TRUE, echo=FALSE, warning=FALSE}
+# access the GGally and ggplot2 libraries
+library(GGally)
+library(ggplot2)
+# create an plot matrix with ggpairs()
+ggpairs(lrn14, lower = list(combo = wrap("facethist", bins = 20)))
+summary(lrn14)
+```
+This dataset has 110 females and 56 males. Mean age of the participants is 25.51. Amongst deep, stra and surf, the variable deep has the highest mean and median. Deep and stra are positively correlated with age and attitude while surf if negatively correlated with age and attitude. The highest correlation is between surf and deep (-0.324)
+```{r regression with linear model, eval=TRUE, echo=FALSE, warning=FALSE}
+# create a regression model with multiple explanatory variables
+my_model <- lm(points ~ attitude  + stra  + age , data = lrn14)
+
+# print out a summary of the model
+summary(my_model)
+
+```
+Amongst the 6 variables tested, onlt attitude, stra and age are significantly associated with points. Attitude has a high association (p-values < 0.001) while stra and age have lower p-values (0.05<p<0.1). For each unit of attitude, there is an increase in points by 
+3.48077 units.   For every unit increase in stra, there is an increase in points by 1.003 unit. For every unit increase in age, there is a decrease in points by 0.08 units (negative association). "R squared" of 0.2 indicates the proportion of the variance in the dependent variable that is predictable from the independent variable.
+
+```{r plots from linear model, eval=TRUE, echo=FALSE, warning=FALSE}
+# draw diagnostic plots using the plot() function. Choose the plots 1, 2 and 5
+par(mfrow=c(2,2))
+plot(my_model,which=c(1,2,5))
+
+```
+
+
+These two plost show that the assumptions of the linear model have not been violated.
+The residuals plot doesn't ahow any patterns. Hence the size of the errors are not dependent on the explanatory variables.
+QQ plot shows that the errors of the model are normally distributed. The residuals vs levarage plots shows a couple of values stand out and cause a high leverage.
+
+
