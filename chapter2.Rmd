@@ -1,9 +1,9 @@
 # Regression and Model Validation
 
 *In this chapter, we learnt how to read data from files and the internet. We also learnt how to explore the contents
-of the file, check the data types and visual the data. Lastly, we learnt how to model our data using a linear regression model*
+of the file, check the data types and visualize the data. Lastly, we learnt how to model our data using a linear regression model*
 
-- We read in data from an URL, visualized the data and relationships between the variables and performed linear regression on selecetd data.
+- We read in data from an URL, visualized the data and relationships between the variables and performed linear regression on selected data.
  
 
 <!-- ##reading the data -->
@@ -28,7 +28,7 @@ library(ggplot2)
 ggpairs(lrn14, lower = list(combo = wrap("facethist", bins = 20)))
 summary(lrn14)
 ```
-This dataset has 110 females and 56 males. Mean age of the participants is 25.51. Amongst deep, stra and surf, the variable deep has the highest mean and median. Deep and stra are positively correlated with age and attitude while surf if negatively correlated with age and attitude. The highest correlation is between surf and deep (-0.324)
+This dataset has 110 females and 56 males. Mean age of the participants is 25.51. Amongst deep, stra and surf, the variable deep has the highest mean and median. Deep and stra are positively correlated with age and attitude while surf is negatively correlated with age and attitude. The highest correlation is between surf and deep (-0.324)
 ```{r regression with linear model, eval=TRUE, echo=FALSE, warning=FALSE}
 # create a regression model with multiple explanatory variables
 my_model <- lm(points ~ attitude  + stra  + age , data = lrn14)
@@ -37,7 +37,7 @@ my_model <- lm(points ~ attitude  + stra  + age , data = lrn14)
 summary(my_model)
 
 ```
-Amongst the 6 variables tested, onlt attitude, stra and age are significantly associated with points. Attitude has a high association (p-values < 0.001) while stra and age have lower p-values (0.05<p<0.1). For each unit of attitude, there is an increase in points by 
+Amongst the 6 variables tested, only attitude, stra and age are significantly associated with points. Attitude has a high association (p-values < 0.001) while stra and age have lower p-values (0.05<p<0.1). For each unit of attitude, there is an increase in points by 
 3.48077 units.   For every unit increase in stra, there is an increase in points by 1.003 unit. For every unit increase in age, there is a decrease in points by 0.08 units (negative association). "R squared" of 0.2 indicates the proportion of the variance in the dependent variable that is predictable from the independent variable.
 
 ```{r plots from linear model, eval=TRUE, echo=FALSE, warning=FALSE}
@@ -48,8 +48,8 @@ plot(my_model,which=c(1,2,5))
 ```
 
 
-These two plost show that the assumptions of the linear model have not been violated.
-The residuals plot doesn't ahow any patterns. Hence the size of the errors are not dependent on the explanatory variables.
+These two plots show that the assumptions of the linear model have not been violated.
+The residuals plot doesn't show any patterns. Hence the size of the errors are not dependent on the explanatory variables.
 QQ plot shows that the errors of the model are normally distributed. The residuals vs levarage plots shows a couple of values stand out and cause a high leverage.
 
 
