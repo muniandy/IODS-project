@@ -5,7 +5,7 @@ We also learnt how to explore data with bar and box plots. Lastly, we learnt how
 
 <!-- ##reading the data -->
 #1. Reading data
-```{r read data, eval=TRUE, echo=FALSE, warning=FALSE}
+```{r read data_1, eval=TRUE, echo=FALSE, warning=FALSE}
 alc = read.table(url("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/alc.txt "), sep=",",header=TRUE)
 dim(alc)
 str(alc)
