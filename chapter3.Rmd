@@ -69,7 +69,7 @@ has less quality family relationships (mean=3.77), more freetime (mean=3.52) and
 and enjoy better health than females with high alcohol use.
 
 #5. Boxplots for selected variables
-```{r visualize data, eval=TRUE, echo=FALSE, warning=FALSE}
+```{r visualize data_1, eval=TRUE, echo=FALSE, warning=FALSE}
 ##################################################box plot#############################################################################
 
 par(mfrow = c(1, 3), mar = c(3, 1, 1, 1))
