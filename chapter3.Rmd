@@ -4,7 +4,7 @@
 We also learnt how to explore data with bar and box plots. Lastly, we learnt how to model our data using a linear regression model.*
 
 <!-- ##reading the data -->
-#1. Reading data
+##1. Reading data
 ```{r read data_1, eval=TRUE, echo=FALSE, warning=FALSE}
 alc = read.table(url("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/alc.txt "), sep=",",header=TRUE)
 dim(alc)
@@ -15,14 +15,14 @@ This dataset has 382 rows and 35 variables.
 There is general information about the students: school they belong to, sex, age, address and family size. There is also information about their parents,
 allocation of hours towards travel to school and studytime, some personal information about what the student is otherwise occupied with, health status (including alcohol consumption) and grades for Math and Portugese across 2 periods.
 
-#2. Hypothesis
+##2. Hypothesis
 Hypotheses to be tested
 1. alcohol use is associated with the quality of family relationships.
 2. alcohol use is associated with student's freetime.
 3. alcohol use is associated with health.
 4. alcohol use is associated with sex.
 
-#3. Variable means
+##3. Variable means
 ```{r tabulate data, eval=TRUE, echo=FALSE, warning=FALSE}
 
 # access the tidyverse libraries tidyr, dplyr, ggplot2
@@ -54,7 +54,7 @@ low alcohol consumption students seem to enjoy worse health (mean = 3.5) than st
 (mean = 3.72)
 
 
-#4. Variable means by sex
+##4. Variable means by sex
 ```{r tabulate data2, eval=TRUE, echo=FALSE, warning=FALSE}
 alc %>% group_by(sex,high_use) %>% summarise(count = n(),mean_famrel=(mean(famrel)),mean_freetime=(mean(freetime)), mean_health=(mean(health)) )
 ```
@@ -68,7 +68,7 @@ has less quality family relationships (mean=3.77), more freetime (mean=3.52) and
 (3.91) as compared to males  who drink less. Males with high alcohol use have more free time and better family relationships 
 and enjoy better health than females with high alcohol use.
 
-#5. Boxplots for selected variables
+##5. Boxplots for selected variables
 ```{r visualize data_1, eval=TRUE, echo=FALSE, warning=FALSE}
 ##################################################box plot#############################################################################
 
@@ -114,7 +114,7 @@ The upper quartile value is 5 in both sexes.
 The median for student health is 4 for students with high and low alcohol use.
 Mean health is higher for students with high alcohol comsumption.
 
-#6. Barplots for selected variables
+##6. Barplots for selected variables
 
 ```{r barplots, eval=TRUE, echo=FALSE, warning=FALSE}
 # use gather() to gather columns into key-value pairs and then glimpse() at the resulting data
@@ -143,7 +143,7 @@ The pattern for family relationship across sexes is the same.
 For freetime, the smallest number of females have the most freetime (5) and the smallest number of males have the lowest freetime (1).
 For health, the highest number of individuals have the healthiest status in both sexes. Across both sexes, there are more individuals with low alcohol use.
 
-#7. Regression model with selected variables (famrel + freetime + health + G1)
+##7. Regression model with selected variables (famrel + freetime + health + G1)
 ```{r model data1, eval=TRUE, echo=FALSE, warning=FALSE}
 
 # find the model with glm()
@@ -169,7 +169,7 @@ Family relationship and first period scores are negatively associated with alcoh
 There is no association between student health and alcohol consumption.
 
 
-#8. Regression model with selected variables (famrel + freetime + sex + G1)
+##8. Regression model with selected variables (famrel + freetime + sex + G1)
 ```{r model data2, eval=TRUE, echo=FALSE, warning=FALSE}
 
 # find the model with glm()
@@ -197,7 +197,7 @@ i.e. the lower the quality of family relationships, the higher the alcohol use. 
 the baseline in the intercept, the coefficient for males is 0.06 + 0.91=0.97.
 In summary, family relationships, student freetime, sex and period 1 scores are are significantly associated with high alcohol use.
 
-#9. predictions versus the actual values
+##9. predictions versus the actual values
 ```{r predict data, eval=TRUE, echo=FALSE, warning=FALSE}
 # predict() the probability of high_use
 m <- glm(high_use ~ famrel + freetime + G1 + sex, data = alc, family = "binomial")
@@ -221,7 +221,7 @@ The model is more accurate at predicting high alcohol use = FALSE. Out of 270 ca
 20 cases to be TRUE (high alcohol use) and  240 as false. Out of 112 cases that were TRUE (high alcohol use) the model predicted
 94 cases to be false (high alcohol use) and  18 as true. 
 
-#10. Percentage predictions accuracy
+##10. Percentage predictions accuracy
 ```{r predict data2, eval=TRUE, echo=FALSE, warning=FALSE}
 
 
