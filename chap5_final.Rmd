@@ -67,7 +67,7 @@ p
 The dataset plot shows that most of the distributions of the variables are not normal.
 
 
-```{r correlation of variables, eval=TRUE, message = FALSE, warnings= FALSE, echo=FALSE}
+```{r correlation of human variables, eval=TRUE, message = FALSE, warnings= FALSE, echo=FALSE}
 
 # calculate the correlation matrix and round it
 cor_matrix<-cor(human) 
