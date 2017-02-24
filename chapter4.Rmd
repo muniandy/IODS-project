@@ -213,6 +213,7 @@ pairs(scaled.dat, col = km$cluster)
 library(cluster) 
 clusplot(scaled.dat,km$cluster, color=TRUE, shade=TRUE, labels=2, lines=0)
 
+
 ```
 
 ##Checking prediction for clusters (not for crime class!)
