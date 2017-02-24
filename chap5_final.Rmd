@@ -52,7 +52,7 @@ There are 154 rows and 8 variables:
 
 ## Variable correlation
 
-```{r plot data, eval=TRUE, message = FALSE, warnings= FALSE, echo=FALSE}
+```{r plot data human, eval=TRUE, message = FALSE, warnings= FALSE, echo=FALSE}
 # access the GGally and ggplot2 libraries
 library(GGally)
 library(ggplot2)
