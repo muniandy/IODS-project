@@ -11,6 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Dimension Reduction
 
+
 This week, we learnt how to do dimension reduction. I did not do the last part-
 no 11.
 
