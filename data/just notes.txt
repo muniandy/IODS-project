@@ -1,0 +1,20 @@
+
+The scaled data shows that females in parlimen are not highly correlated with maternal mortality rate
+as well as adoscelence birth rate. There is also negative correlation between expected education and life 
+expectancy with maternal mortality ratio aand adolexcence birth rate. The countries that are
+closer together are more correlated.
+
+The plot using the scaled data seems more accurate (when we refer to the correlation plot)
+because the data are all compared on the same scale.
+
+
+
+There is a high, significant correlation between life expectancy and 
+expected education (0.79) and expected education and GNI (0.62). There 
+is also a high negative correlation between expected education (-0.73)
+and adolescence birth rate (-0.7). Life expectancy also has a high positive
+correlation (0.63) with GNI. There is also a high negative correlation 
+between life expectancy and maternal mortality rate (-0.85) and life expectancy and
+adolescence birth rate (-0.72). There is also a significant correlation between GNI and 
+adolescence birth rate (-0.55) and maternal mortality rate and adolescence birth rate (0.75).
+ 
