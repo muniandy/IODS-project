@@ -7,7 +7,7 @@
 ##BOSTON Data Variables
 #########################################################################################
 
-```{r read data, eval=TRUE, message = FALSE, warnings= FALSE, echo=FALSE}
+```{r read data Boston, eval=TRUE, message = FALSE, warnings= FALSE, echo=FALSE}
 # load the data
 library(ggplot2)
 library(MASS)
