@@ -1,5 +1,6 @@
 #Mahes Muniandy 30.01.2017 
 # data wrangling for exercise 5 
+#http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/human1.txt
 
 
 #read the data
@@ -65,3 +66,27 @@ human$Country
 #write data to file
 write.table(human, file = "human.txt", quote = FALSE, sep = "\t", row.names = FALSE, col.names = TRUE) 
 
+library(stringr)
+names(human)
+human$GNI_per_cap
+str_replace(human$GNI_per_cap, pattern=",",replace="") %>% as.numeric() %>% print()
+
+#mutate human
+human <- mutate(human, GNI = str_replace(human$GNI_per_cap, pattern=",",replace="") %>% as.numeric())
+
+#keep only "Country", "gii_FM_edu_rat", "gii_FM_work_rat", "exp_edu", "life_exp", "GNI", "mat_mor_rat", "adol_birth_rat", "fem_parlimen" 
+keep_columns<-c("Country", "gii_FM_edu_rat", "gii_FM_work_rat", "exp_edu", "life_exp", "GNI", "mat_mor_rat", "adol_birth_rat", "fem_parlimen")
+human_new<-select(human,one_of(keep_columns))
+
+complete.cases(human_new)
+human_no_NA=filter(human, complete.cases(human_new))
+human_no_NA
+
+human_no_NA$Country
+last=nrow(human_no_NA)-7
+human_=human[1:last,]
+
+rownames(human_)=human_$Country
+human_=human_[,-1]
+#write data to file
+write.table(human, file = "human.txt", quote = FALSE, sep = "\t", row.names = TRUE, col.names = TRUE) 

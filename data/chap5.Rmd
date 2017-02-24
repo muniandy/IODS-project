@@ -1,0 +1,148 @@
+---
+title: "Exercise 5"
+author: "Mahes Muniandy"
+date: "24 February 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Dimension Reduction
+
+This week, we learnt how to do dimension reduction.
+
+## Summary of data
+
+```{r readdata, echo=FALSE, warning=FALSE, message=FALSE}
+
+human = read.table("human2.txt", sep="\t", quote = "", stringsAsFactors = FALSE, header=TRUE)
+dim(human)
+
+str(human)
+
+library(FactoMineR)
+library(GGally)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(MASS)
+```
+
+There are 154 rows and 8 variables:
+
+ - gii_FM_edu_rat: ratio of females over males with at least secondary education
+ 
+ - gii_FM_work_rat  : ratio of females over males who work
+ 
+ - exp_edu          : Expected years of schooling 
+ 
+ - life_exp         : Life expectancy at birth
+ 
+ - GNI              : Gross National Income per capita
+ 
+ - mat_mor_rat      : Maternal mortality ratio
+ 
+ - adol_birth_rat   : Adolescent birth rate
+ 
+ - fem_parlimen     : percentage of females in parlimen
+
+
+## Variable correlation
+
+```{r plot data, eval=TRUE, message = FALSE, warnings= FALSE, echo=FALSE}
+# access the GGally and ggplot2 libraries
+library(GGally)
+library(ggplot2)
+
+# create a more advanced plot matrix with ggpairs(learning2014[-1])
+p <- ggpairs(human, mapping = aes( alpha=0.3), lower = list(combo = wrap("facethist", bins = 20)))
+
+# draw the plot
+p
+
+```
+The dataset plot shows that most of the distributions of the variables are not normal.
+
+
+```{r correlation of variables, eval=TRUE, message = FALSE, warnings= FALSE, echo=FALSE}
+
+# calculate the correlation matrix and round it
+cor_matrix<-cor(human) 
+
+# print the correlation matrix
+cor_matrix %>% round(2)  %>% print() 
+
+library(corrplot)
+
+cor.mtest <- function(mat, conf.level = 0.95){
+  mat <- as.matrix(mat)
+  n <- ncol(mat)
+  p.mat <- lowCI.mat <- uppCI.mat <- matrix(NA, n, n)
+  diag(p.mat) <- 0
+  diag(lowCI.mat) <- diag(uppCI.mat) <- 1
+  for(i in 1:(n-1)){
+    for(j in (i+1):n){
+      tmp <- cor.test(mat[,i], mat[,j], conf.level = conf.level)
+      p.mat[i,j] <- p.mat[j,i] <- tmp$p.value
+      lowCI.mat[i,j] <- lowCI.mat[j,i] <- tmp$conf.int[1]
+      uppCI.mat[i,j] <- uppCI.mat[j,i] <- tmp$conf.int[2]
+    }
+  }
+  return(list(p.mat, lowCI.mat, uppCI.mat))
+}
+
+res1 <- cor.mtest(human,0.95)
+# visualize the correlation matrix
+corrplot.mixed(cor_matrix,tl.cex=0.5,p.mat = res1[[1]], insig = "blank"
+,mar=c(1,0,2,0),number.cex=0.7, title="Correlation between variables")
+
+```
+
+
+The table above shows the correlations between the variables. The correlation plot below it shows the value of the above correlations with circles: the bigger the circle, the higher the correlation. Only significant (p<0.05) correlations are shown.
+
+There is a high, significant correlation between life expectancy and 
+expected education (0.79) and expected education and GNI (0.62). There 
+is also a high negative correlation between expected education (-0.73)
+and adolescence birth rate (-0.7). Life expectancy also has a high positive
+correlation (0.63) with GNI. There is also a high negative correlation 
+between life expectancy and maternal mortality rate (-0.85) and life expectancy and adolescence birth rate (-0.72). There is also a significant correlation between GNI and adolescence birth rate (-0.55) and maternal mortality rate and adolescence birth rate (0.75).
+ 
+## PCA with unscaled data 
+```{r pca unscaled, echo=FALSE, message=FALSE, warning=FALSE}
+pca_human <- prcomp(human)
+
+s<-summary(pca_human)
+s
+pca_pr<-round(100*s$importance[2,], digits=1)
+pca_pr
+pc_lab<-paste0(names(pca_pr),"(",pca_pr,"%)")
+biplot(pca_human, , choices =1:2, cex=c(0.8,1),col=c("grey40","deeppink2"),xlab=pc_lab[1],ylab=pc_lab[2]) 
+
+```
+The plot shows that 1 PC is enough to capture almost 100% of the variation in the data. The biplot shows that countries that cluster together have high correlations.
+ 
+## PCA with scaled data  
+```{r pca scaled, echo=FALSE, message=FALSE, warning=FALSE}
+
+human_scaled=scale(human)
+human_scaled=as.data.frame(human_scaled)
+pca_human <- prcomp(human_scaled)
+
+s<-summary(pca_human)
+s
+pca_pr<-round(100*s$importance[2,], digits=1)
+pca_pr
+pc_lab<-paste0(names(pca_pr),"(",pca_pr,"%)")
+biplot(pca_human, choices =1:2, cex=c(0.8,1),col=c("grey40","deeppink2"),xlab=pc_lab[1],ylab=pc_lab[2]) 
+
+```
+The scaled data shows that females in parlimen are not highly correlated with maternal mortality rate
+as well as adoscelence birth rate. There is also negative correlation between expected education and life 
+expectancy with maternal mortality ratio aand adolexcence birth rate. The countries that are
+closer together are more correlated.
+
+The plot using the scaled data seems more accurate (when we refer to the correlation plot)
+because the data are all compared on the same scale. With this plot, it is clear that with PC1 and 2, about 59.6% variation in data is explained.
